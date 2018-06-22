@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>totally static</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function(event) {
+        console.log("DOM fully loaded and parsed")
+        fetch('/users', { method: 'GET'})
+        .then((response) => {
+          return response.json()
+        })
+        .then((myUsers) => {
+          console.log(myUsers)
+          // represents success
+          // DOM manipulation
+          let ul = document.getElementById('userlist')
+          for( user of myUsers ) {
+            let li = document.createElement('li')
+            li.innerText = user.name
+            ul.appendChild(li)
+          }
+
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <h1>STATIC PAGE</h1>
+    <p>Welcome to Stuff</p>
+    <ul id="userlist">
+    </ul>
+  </body>
+</html>
